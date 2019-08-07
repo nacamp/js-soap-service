@@ -1,0 +1,51 @@
+<definitions name = "NotificationService"
+             targetNamespace = "http://127.0.0.1:3000/wsdl/NotificationService.wsdl"
+             xmlns = "http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns = "http://127.0.0.1:3000/wsdl/NotificationService.wsdl"
+             xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+
+    <message name = "NotificationRequest">
+        <part name = "message" type = "xsd:string"/>
+    </message>
+
+    <message name = "NotificationResponse">
+        <part name = "status" type = "xsd:string"/>
+    </message>
+
+    <portType name = "Notification_PortType">
+        <operation name = "notify">
+            <input message = "tns:NotificationRequest"/>
+            <output message = "tns:NotificationResponse"/>
+        </operation>
+    </portType>
+
+    <binding name = "Notification_Binding" type = "tns:Notification_PortType">
+        <soap:binding style = "rpc"
+                      transport = "http://schemas.xmlsoap.org/soap/http"/>
+        <operation name = "notify">
+            <soap:operation soapAction = "notify"/>
+            <input>
+                <soap:body
+                        encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace = "urn:examples:notification"
+                        use = "encoded"/>
+            </input>
+
+            <output>
+                <soap:body
+                        encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace = "urn:examples:notification"
+                        use = "encoded"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name = "Notification_Service">
+        <documentation>WSDL File for NotificationService</documentation>
+        <port binding = "tns:Notification_Binding" name = "Notification_Port">
+            <soap:address
+                    location = "http://127.0.0.1:3000/notification" />
+        </port>
+    </service>
+</definitions>

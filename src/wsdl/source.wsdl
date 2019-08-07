@@ -1,0 +1,51 @@
+<definitions name = "NotificationService"
+             targetNamespace = "http://127.0.0.1:3000/wsdl/SourceService.wsdl"
+             xmlns = "http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns = "http://127.0.0.1:3000/wsdl/SourceService.wsdl"
+             xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+
+    <message name = "SourceRequest">
+        <part name = "name" type = "xsd:string"/>
+    </message>
+
+    <message name = "SourceResponse">
+        <part name = "result" type = "xsd:string"/>
+    </message>
+
+    <portType name = "Source_PortType">
+        <operation name = "read">
+            <input message = "tns:SourceRequest"/>
+            <output message = "tns:SourceResponse"/>
+        </operation>
+    </portType>
+
+    <binding name = "Source_Binding" type = "tns:Source_PortType">
+        <soap:binding style = "rpc"
+                      transport = "http://schemas.xmlsoap.org/soap/http"/>
+        <operation name = "read">
+            <soap:operation soapAction = "read"/>
+            <input>
+                <soap:body
+                        encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace = "urn:examples:source"
+                        use = "encoded"/>
+            </input>
+
+            <output>
+                <soap:body
+                        encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace = "urn:examples:source"
+                        use = "encoded"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name = "Source_Service">
+        <documentation>WSDL File for SourceService</documentation>
+        <port binding = "tns:Source_Binding" name = "Source_Port">
+            <soap:address
+                    location = "http://127.0.0.1:3000/source" />
+        </port>
+    </service>
+</definitions>
