@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "~4.17.1",
-    "luxon": "^1.17.1",
+    "luxon": "^1.28.1",
     "soap": "^0.28.0",
     "@hapi/joi": "^15.1.0",
     "dotenv": "^8.0.0"
